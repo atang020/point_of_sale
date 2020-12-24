@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  height: calc(100vh - 56px);
+}
+
+h2 {
+  margin: 24px;
+}
+
+.sectionContainer {
+  flex-grow: 3;
+  padding: 16px;
+}
+
+.cartSummaryContainer {
+  width: 300px;
+}

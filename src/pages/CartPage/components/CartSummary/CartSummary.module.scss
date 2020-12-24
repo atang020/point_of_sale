@@ -1,0 +1,103 @@
+.container {
+   width: 300px;
+   height: 100%;
+   background: #d3d3d3;
+   display: flex;
+   flex-direction: column;
+}
+
+.contentContainer {
+  padding: 8px;
+
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .cartItemsSection {
+    margin: 8px 0;
+    overflow: scroll;
+  }
+
+  .cartItem {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0;
+  }
+
+  .cartItemDescription {
+    display: flex;
+    flex-grow: 2;
+    padding: 0 12px;
+  }
+
+}
+
+.buttonSection {
+  bottom: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+
+  .subTotalSection {
+    padding: 8px;
+    font-size: 24px;
+    bottom: 150px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.modalContainer {
+  background-color: rgb(252, 211, 211);
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 42px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+
+  .closeIcon {
+    text-align: right;
+  }
+
+  .image {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  .textSection {
+    margin: 16px 32px 0;
+
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      height: 150px;
+      text-overflow: clip;
+      white-space: pre-wrap;
+      overflow: scroll;
+    }
+  }
+
+  .buttonSection {
+    margin: 0 auto;
+    position: relative;
+
+    button {
+      margin: 18px 0;
+    }
+  }
+}
