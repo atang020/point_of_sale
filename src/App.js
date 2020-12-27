@@ -9,6 +9,7 @@ import './styles/global.scss';
 import StartPage from 'pages/StartPage/StartPage';
 import CartPage from 'pages/CartPage/CartPage';
 
+// Init
 function App() {
   const customHistory = createBrowserHistory();
 
