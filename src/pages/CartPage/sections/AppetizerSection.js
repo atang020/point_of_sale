@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import ItemTile from 'components/ItemTile/ItemTile';
 
-import { getMenu } from 'services/CartService';
+import { getAppetizers } from 'services/CartService';
 
 import styles from './ALaCarteSection.module.scss';
 
@@ -50,7 +50,7 @@ class ALaCarteSection extends Component {
 
   async getMenuItems() {
     try {
-      const res = await getMenu()
+      const res = await getAppetizers()
       const menu = _.get(res, 'data');
 
       this.setState({ items: menu });
@@ -65,7 +65,7 @@ class ALaCarteSection extends Component {
 
     return (
       <div className={styles.container}>
-        <h2>A La Carte Items</h2>
+        <h2>Appetizer Items</h2>
         <div className={styles.section}>
           {_.map(items, (item) => {
             return (

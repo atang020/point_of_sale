@@ -15,3 +15,50 @@ h2 {
 .cartSummaryContainer {
   width: 300px;
 }
+
+
+.modalContainer {
+  background-color: rgb(252, 211, 211);
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 42px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+
+  .closeIcon {
+    text-align: right;
+  }
+
+  .image {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  .textSection {
+    margin: 16px 32px 0;
+
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      height: 150px;
+      text-overflow: clip;
+      white-space: pre-wrap;
+      // overflow-y: scroll;
+    }
+  }
+
+  .buttonSection {
+    margin: 0 auto;
+  }
+}

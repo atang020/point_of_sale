@@ -4,8 +4,14 @@ import _ from 'lodash';
 import Navigation from 'components/Navigation/Navigation';
 
 import CartSummary from 'pages/CartPage/components/CartSummary/CartSummary';
+import SimpleModal from 'components/SimpleModal/SimpleModal';
+import SimpleButton from 'components/SimpleButton/SimpleButton';
 
 import ALaCarteSection from './sections/ALaCarteSection';
+import AppetizerSection from './sections/AppetizerSection';
+import SoupSection from './sections/SoupSection';
+
+import { createOrder } from 'services/CartService';
 
 import styles from './CartPage.module.scss';
 
@@ -40,6 +46,7 @@ class CartPage extends Component {
 
   state = {
     cartItems: [],
+    successfulOrder: false
   }
 
   handleAddCartItem = (item) => {
@@ -56,15 +63,46 @@ class CartPage extends Component {
 
   handleCheckout = () => {
     const { cartItems } = this.state;
-    console.log("CHECKING OUT!", cartItems)
+    const subTotal = parseFloat(_.sumBy(cartItems, (cartItem) => cartItem.price)).toFixed(2);
+    const tax = parseFloat((0.0925*subTotal)).toFixed(2);
+    const cartTotal = parseFloat(subTotal + tax).toFixed(2);
+
+    const orderObj = {
+      customerName: 'Testing 1',
+      orderItems: cartItems,
+      subTotal,
+      tax,
+      cartTotal,
+    }
+
+    console.log("ORDER OBJ ", orderObj)
+
+    createOrder(orderObj).then((result) => {
+      console.log("RESULT ", result)
+      const status = _.get(result, 'status');
+
+      if (status === 200) {
+        this.setState({ successfulOrder: true })
+      }
+    }).catch((error) => {
+      console.log("ERROR ", error)
+    });
   }
 
   renderCartSection(cartSection) {
     switch(cartSection) {
       case 'app':
-        return (<div>App</div>)
+        return (
+          <AppetizerSection
+            handleAddCartItem={this.handleAddCartItem}
+          />
+        )
       case 'soup':
-        return (<div>Soup</div>)
+        return (
+          <SoupSection
+            handleAddCartItem={this.handleAddCartItem}
+          />
+        )
       case 'combo':
         return (<div>Combo</div>)
       case 'alacarte':
@@ -82,6 +120,34 @@ class CartPage extends Component {
     }
   }
 
+  renderModal() {
+    const { successfulOrder } = this.state;
+    return (
+      <SimpleModal
+        open={successfulOrder}
+        handleClose={() => { this.setState({ successfulOrder: false, cartItems: [] })}}
+      >
+        <div className={styles.modalContainer}>
+          <div className={styles.closeIcon} onClick={this.closeModal}>Close</div>
+          <div className={styles.textSection}>
+            <div className={styles.title}>Order has been placed!</div>
+            <div className={styles.subtitle}>Thank you!</div>
+          </div>
+          <div className={styles.buttonSection}>
+            <SimpleButton
+              color='primary'
+              size='large'
+              value='Close'
+              onClick={() => {
+                this.setState({ successfulOrder: false, cartItems: [] });
+              }}
+            />
+          </div>
+        </div>
+      </SimpleModal>
+    )
+  }
+
   render() {
     const { match, history } = this.props;
     const { cartItems } = this.state;
@@ -95,6 +161,7 @@ class CartPage extends Component {
           history={history}
         />
         <div className={styles.container}>
+          {this.renderModal()}
           <div className={styles.sectionContainer}>
             {cartSectionContent}
           </div>

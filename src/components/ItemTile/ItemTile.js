@@ -16,22 +16,21 @@ import styles from './ItemTile.module.scss';
 class ItemTile extends Component {
 
   state = {
-    showModal: false,
+    openModal: false,
   }
 
   showModal = () => {
     const { item } = this.props;
-    this.setState({ showModal: true });
+    this.setState({ openModal: true });
   }
 
   closeModal = () => {
-    this.setState({ showModal: false });
-
+    this.setState({ openModal: false });
   }
 
   renderModal() {
     const { item, handleAddCartItem } = this.props;
-    const { showModal } = this.state;
+    const { openModal } = this.state;
 
     const imageUrl = _.get(item, 'imageUrl');
     const itemName = _.get(item, 'name');
@@ -39,7 +38,7 @@ class ItemTile extends Component {
 
     return (
       <SimpleModal
-        open={showModal}
+        open={openModal}
         handleClose={this.closeModal}
       >
         <div className={styles.modalContainer}>
@@ -67,22 +66,24 @@ class ItemTile extends Component {
 
   render() {
     const { routes, history, item } = this.props;
-    const { showModal } = this.state;
+    const { openModal } = this.state;
 
     const imageUrl = _.get(item, 'imageUrl');
     const itemName = _.get(item, 'name');
     const itemDescription = _.get(item, 'description');
 
     return (
-      <div className={styles.container}>
-        {showModal && this.renderModal()}
-        <img src={imageUrl} className={styles.image}/>
-        <div className={styles.textSection}>
-          <div className={styles.title}>{itemName}</div>
-          <div className={styles.subtitle}>{itemDescription}</div>
+      <section>
+        {openModal && this.renderModal()}
+        <div className={styles.container} onClick={this.showModal}>
+          <img src={imageUrl} className={styles.image}/>
+          <div className={styles.textSection}>
+            <div className={styles.title}>{itemName}</div>
+            <div className={styles.subtitle}>{itemDescription}</div>
+          </div>
+          <div className={styles.addSection}>Add</div>
         </div>
-        <div className={styles.addSection} onClick={this.showModal}>Add</div>
-      </div>
+      </section>
     );
   }
 }
