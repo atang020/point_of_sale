@@ -10,6 +10,7 @@ import SimpleButton from 'components/SimpleButton/SimpleButton';
 import ALaCarteSection from './sections/ALaCarteSection';
 import AppetizerSection from './sections/AppetizerSection';
 import SoupSection from './sections/SoupSection';
+import ComboSection from './sections/ComboSection';
 
 import { createOrder } from 'services/CartService';
 
@@ -104,7 +105,11 @@ class CartPage extends Component {
           />
         )
       case 'combo':
-        return (<div>Combo</div>)
+        return (
+          <ComboSection
+            handleAddCartItem={this.handleAddCartItem}
+          />
+        )
       case 'alacarte':
         return (
           <ALaCarteSection

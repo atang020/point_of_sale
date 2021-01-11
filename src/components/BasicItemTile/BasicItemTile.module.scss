@@ -1,0 +1,88 @@
+.container {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  margin: 16px;
+  background-color: rgba(248, 73, 73, 0.1);
+  box-shadow: 4px 6px 4px 0px rgba(255,50,10,.2);
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.textSection {
+  margin: 8px 16px 0;
+
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    font-weight: 300;
+    height: 40px;
+    text-overflow: clip;
+    white-space: pre-wrap;
+  }
+}
+
+.addSection {
+  font-size: 16px;
+  text-align: right;
+  color: #a70606;
+  padding: 8px 16px;
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.modalContainer {
+  background-color: rgb(252, 211, 211);
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 42px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+
+  .closeIcon {
+    text-align: right;
+  }
+
+  .image {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  .textSection {
+    margin: 16px 32px 0;
+
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      height: 150px;
+      text-overflow: clip;
+      white-space: pre-wrap;
+      // overflow-y: scroll;
+    }
+  }
+
+  .buttonSection {
+    margin: 0 auto;
+  }
+}

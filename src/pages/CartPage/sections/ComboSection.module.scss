@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+.section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  overflow: scroll;
+  height: calc(100vh - 164px);
+}
+
+.pointer {
+  cursor: pointer;
+}
