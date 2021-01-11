@@ -7,36 +7,6 @@ import { getMenu } from 'services/CartService';
 
 import styles from './ALaCarteSection.module.scss';
 
-const mockItems = [
-  {
-    '_id': 1,
-    'name': 'Orange Chicken',
-    'description': 'Cwispy Egg Rolls',
-    'category': 'entree',
-    'price': 1.99,
-    'available': true,
-    'imageUrl': '/images/orange_chicken.jpg'
-  },
-  {
-    '_id': 2,
-    'name': 'Crab Wonton',
-    'description': 'Cwispy Crab Wonton Cwispy Crab Wonton Cwispy Crab Wonton',
-    'category': 'appetizers',
-    'price': 2.99,
-    'available': true,
-    'imageUrl': '/images/crab_wonton.jpg'
-  },
-  {
-    '_id': 3,
-    'name': 'Egg Drop Soup',
-    'description': 'Egg soup',
-    'category': 'soups',
-    'price': 1.89,
-    'available': true,
-    'imageUrl': '/images/egg_drop.jpg'
-  }
-]
-
 class ALaCarteSection extends Component {
 
   state = {
@@ -45,7 +15,6 @@ class ALaCarteSection extends Component {
 
   componentDidMount() {
     this.getMenuItems();
-    this.setState({ items: mockItems });
   }
 
   async getMenuItems() {
