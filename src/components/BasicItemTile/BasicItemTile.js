@@ -16,59 +16,30 @@ import styles from './BasicItemTile.module.scss';
 class BasicItemTile extends Component {
 
   state = {
-    openModal: false,
+    selected: false,
   }
 
-  showModal = () => {
-    const { item } = this.props;
-    this.setState({ openModal: true });
-  }
+  toggleSelected = () => {
+    const { handleAdd, handleRemove, item, disableAdd } = this.props;
+    const { selected } = this.state;
 
-  closeModal = () => {
-    this.setState({ openModal: false });
-  }
+    if (!selected && disableAdd) {
+      return;
+    }
 
-  renderModal() {
-    const { item, handleAddCartItem } = this.props;
-    const { openModal } = this.state;
-
-    const imageUrl = _.get(item, 'imageUrl');
-    const itemName = _.get(item, 'name');
-    const itemDescription = _.get(item, 'description');
-
-    return (
-      <SimpleModal
-        open={openModal}
-        handleClose={this.closeModal}
-      >
-        <div className={styles.modalContainer}>
-          <div className={styles.closeIcon} onClick={this.closeModal}>Close</div>
-          <img src={imageUrl} className={styles.image}/>
-          <div className={styles.textSection}>
-            <div className={styles.title}>{itemName}</div>
-            <div className={styles.subtitle}>{itemDescription}</div>
-          </div>
-          <div className={styles.buttonSection}>
-            <SimpleButton
-              color='primary'
-              size='large'
-              value='Add to cart'
-              onClick={() => {
-                handleAddCartItem(item);
-                this.closeModal()
-              }}
-            />
-          </div>
-        </div>
-      </SimpleModal>
-    )
+    this.setState({ selected: !selected }, () => {
+      if(this.state.selected) {
+        handleAdd(item);
+      } else {
+        handleRemove(item);
+      }
+    })
   }
 
   render() {
-    const { routes, history, item } = this.props;
-    const { openModal } = this.state;
+    const { routes, history, item, disableAdd, hideAddRemove } = this.props;
+    const { selected } = this.state;
 
-    const imageUrl = _.get(item, 'imageUrl');
     const itemName = _.get(item, 'name');
     const itemDescription = _.get(item, 'description');
 
@@ -80,8 +51,11 @@ class BasicItemTile extends Component {
         <div>
           {itemDescription}
         </div>
-        <div className={styles.addSection}>Add</div>
-
+        {!hideAddRemove && <div
+          className={`${disableAdd && !selected ? styles.disabled : styles.addSection}`}
+          onClick={this.toggleSelected}>
+            {selected ? 'Remove': 'Add'}
+        </div>}
       </section>
     );
   }
